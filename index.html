@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Prove Que Me Conhece ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+background:linear-gradient(135deg,#ff4f9a,#ff9bcf);
+color:white;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+.container{
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:25px;
+width:90%;
+max-width:420px;
+text-align:center;
+box-shadow:0 0 40px rgba(0,0,0,.2);
+}
+
+h1{
+margin-bottom:10px;
+}
+
+p{
+opacity:.9;
+}
+
+input{
+margin-top:20px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:20px;
+outline:none;
+text-align:center;
+}
+
+button{
+margin-top:20px;
+padding:10px 25px;
+border:none;
+border-radius:25px;
+background:white;
+color:#ff4f9a;
+font-weight:600;
+cursor:pointer;
+}
+
+.heart{
+position:fixed;
+bottom:-10px;
+animation:float 6s linear forwards;
+}
+
+@keyframes float{
+to{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+.hidden{
+display:none;
+}
+
+.letter{
+line-height:1.6;
+margin-top:15px;
+font-size:.9rem;
+}
+
+@media(max-width:480px){
+.container{
+padding:25px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="title">💖 Quiz do Amor 💖</h1>
+
+<p id="question">qual time eu torço ?</p>
+
+<input id="answer" placeholder="Digite aqui...">
+
+<button onclick="check()">Responder</button>
+
+<div id="letter" class="hidden">
+
+<h2>Minha Cartinha 💌</h2>
+
+<div class="letter">
+
+<p>amoor, eu te amo muitoo, vc é a pessoa que eu mais amei entre varias garotas...</p>
+
+<p>
+eu quero sempre ta ao seu lado sendo o mesmo cara irritante e carinhoso com vc, quero que vc seja a pessoa que sempre pedi a Deus, quem esteja la quando eu precisar,
+</p>
+
+<p>
+ja vc pode contar comigo pra oq precisar, vou sempre ta la te apoiando pra tudo meu amor,
+</p>
+
+<p>
+afinal, eu te amo 🥰
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const perguntas = [
+{q:"qual time eu torço ?", a:"santos"},
+{q:"qual meu jogador favorito ?", a:"neymar"},
+{q:"inicial pra garota mais especial pra mim ?", a:"w"},
+{q:"diga de 0/10 o quanto eu te amo", a:"10"},
+{q:"meu aniversario (sem usar '/' pra separar, tudo junto e com o ano que nasci)", a:"03012011"}
+];
+
+let atual = 0;
+
+function normalizar(txt){
+return txt
+.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.trim();
+}
+
+function check(){
+
+const input = normalizar(document.getElementById("answer").value);
+const resposta = normalizar(perguntas[atual].a);
+
+if(input === resposta){
+
+atual++;
+
+if(atual < perguntas.length){
+
+document.getElementById("question").innerText = perguntas[atual].q;
+document.getElementById("answer").value="";
+
+}else{
+
+document.getElementById("question").classList.add("hidden");
+document.getElementById("answer").classList.add("hidden");
+document.querySelector("button").classList.add("hidden");
+
+document.getElementById("title").innerText="Parabéns meu amor ❤️";
+document.getElementById("letter").classList.remove("hidden");
+
+}
+
+}else{
+alert("Errado 😢 tenta de novo meu amor");
+}
+
+}
+
+function heart(){
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=Math.random()*20+15+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+}
+
+setInterval(heart,600);
+
+</script>
+
+</body>
+</html>
